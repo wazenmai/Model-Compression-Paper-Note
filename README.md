@@ -64,4 +64,4 @@ Hope we all find our own path on the research life. :seedling:
     - Comment: It can perfom the entire family of compressed models at one time that is different from other approach which needs one process for one compressed model.
 
 ### Acknowledgement
-Thanks for [Awesome-LLM-Prune](https://github.com/pprp/Awesome-LLM-Prune) that insprires me for this note, the template is based on their work.
+Thanks for [Awesome-LLM-Prune](https://github.com/pprp/Awesome-LLM-Prune) that inspires me for this note, the template is based on their work.

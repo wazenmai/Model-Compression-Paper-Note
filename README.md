@@ -1,7 +1,7 @@
 # :whale: Model-Compression-Paper-Note
 Model compression paper note including pruning, distillation.
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
-Hope we all find our own path on the research life. :seedling:
+Hope we all find our own path in the research life. :seedling:
 
 - **PERP: Rethinking the Prune-Retrain Paradigm in the Era of LLMs**
     - Author: **Max Zimmer, Megi Andoni,** etc

@@ -63,5 +63,45 @@ Hope we all find our own path in the research life. :seedling:
     - Summary: Iteravely prune structure like attention heads or FFN intermediate neurons. In each pruning step, it prune one sub-structure and update corresponding weight with the help of hessian matrix then update hessian matrix w.r.t new mask. Use layer-wise token distillation as recovery.
     - Comment: It can perfom the entire family of compressed models at one time that is different from other approach which needs one process for one compressed model.
 
+- **Language Model Compression with Weighted Low-rank Factorization**
+    - Author: Yen-Chang Hsu, Ting Hua, etc
+    - Institute: Samsung Research America , Northeastern University
+    - Link: https://arxiv.org/abs/2207.00112
+    - Code: Not available
+    - Pub: ICLR 2022
+    - Tag: `Structured Pruning` `SVD`
+    - Summary: They found that after SVD, some vectors with smaller singular values have bigger impact on task accuracy than vectors with bigger singular value. Therefore, they use SVD on weights multiplied with row-wise fisher information to compress model.
+    - Comment: The property they found in SVD of task is interesting, that’s why standard SVD does not perform well on model compression when benchmarking.
+
+- **A Fast Post-Training Pruning Framework for Transformers**
+    - Author: Woosuk Kwon, Sehoon Kim, etc
+    - Institute: UC Berkeley, etc.
+    - Link: https://arxiv.org/abs/2204.09656
+    - Code: https://github.com/WoosukKwon/retraining-free-pruning
+    - Pub: NeurIPS 2022
+    - Tag: `Structured Pruning` `No Retraining`
+    - Summary: Prune transformer heads and filters based on fisher information approximation. View layer reconstruction as linear least square problem to adjust mask value in a short time so that it can prune Transformer in less than 3 minutes on single GPU.
+    - Comment: To the best of my knowledge, this is the first paper to reduce transformer-based structured pruning time from hours to minutes.
+
+- **Gradient-Free Structured Pruning with Unlabeled Data**
+    - Author: Azade Nova, Hanjun Dai, Dale Schuurmans
+    - Institute: Google DeepMind
+    - Link: https://arxiv.org/abs/2303.04185
+    - Code: Not available
+    - Pub: ICML 2023
+    - Tag: `Structured Pruning` `No Retraining`
+    - Summary: A structured pruning method that does not require retraining nor labeled data. Introduce kernelized convex masking on FFN’s weight to decide the importance of each neuron.
+    - Comment: This paper is based on “A Fast Post-Training Pruning Framework for Transformers” that the only difference is they use KCM and activated output to decide importance and get rid of mask rearrangement. The paper requires lots of math knowledge to understand KCM.
+
+- **Accurate Retraining-free Pruning for Pretrained Encoder-based Language Models**
+    - Author: Seungcheol Park, Hojun Choi, U Kang
+    - Institute: Seoul National University
+    - Link: https://openreview.net/forum?id=s2NjWfaYdZ
+    - Code: Supplementary material of above link
+    - Pub: ICLR 2024
+    - Tag: `Structured Pruning` `No Retraining`
+    - Summary: Use KL divergence of student’s and teacher’s logits as predictive knowledge and values of heads and activation output as representative knowledge. Introduce knowledge-preserving pruning (KPP) that prune and adjust weight while taking one structure once a time from input layer to output layer to avoid accuracy degradation.
+    - Comment: KPP gives their benchmark metric good scores while pruning BERT within 10 minutes. It performs way more better than its series (A fast post-training pruning framework, KCM).
+
 ### Acknowledgement
 Thanks for [Awesome-LLM-Prune](https://github.com/pprp/Awesome-LLM-Prune) that inspires me for this note, the template is based on their work.

@@ -3,6 +3,26 @@ Model compression paper note including pruning, distillation.
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
 Hope we all find our own path in the research life. :seedling:
 
+- **ONE-SHOT SENSITIVITY-AWARE MIXED SPARSITY PRUNING FOR LARGE LANGUAGE MODELS**
+    - Author: *Hang Shao, Bei Liu, Yanmin Qia*
+    - Institute: Auditory Cognition and Computational Acoustics Lab, etc.
+    - Link: https://arxiv.org/abs/2310.09499
+    - Code: Not available
+    - Pub: ICASSP 2024
+    - Tag:  `Unstructured Pruning` `No Retraining`
+    - Summary: They combine OBD and OBS’s saliency score as their metric for evaluating the sensitivity of weights. They also compute the sensitivity level of each weight to give them different sparsity ratio s.t. the overall sparsity is satisfied. The performance is better than SparseGPT and works well with quantization.
+    - Comment: They use lots of approximation when computing the sensitivity level of each weight matrices, but give intersting insights on the property of each layer and each weight matrices. (refer to Fig.1, Fig.2)
+
+- **THE LLM SURGEON**
+    - Author: Tycho F.A. van der Ouderaa, Markus Nagel, etc.
+    - Institute: Imperial College London , Qualcomm AI Research, etc.
+    - Link: https://openreview.net/pdf?id=DYIIRgwg2i
+    - Code: Not available
+    - Pub: ICLR 2024
+    - Tag: `Structured Pruning` `Unstructured Pruning` `LLM`
+    - Summary: Propose algorithm for unstructured (SOTA), semi-structured (SOTA) and structured compression of LLMs. The algorithm can dynamically allocate weight across layers with global threshold. Utilise Fisher approximation with KFAC approximation to expand the curvature of the loss landscape, consider correlated weight, “prune and update” the model in multiple shots.
+    - Comment: The math they use is very complex, I spend a few days to fully understand the whole background. While the method they propose is very strong to deal with any pruning condition of LLMs.
+
 - **PERP: Rethinking the Prune-Retrain Paradigm in the Era of LLMs**
     - Author: **Max Zimmer, Megi Andoni,** etc
     - Institute: Zuse Institute Berlin, Germany and Technische Universita ̈t Berlin, Germany

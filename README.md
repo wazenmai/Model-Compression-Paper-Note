@@ -3,13 +3,34 @@ Model compression paper note including pruning, distillation.
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
 Hope we all find our own path in the research life. :seedling:
 
+- **ShortGPT: Layers in Large Language Models are More Redundant Than You Expect**
+    - Author: Xin Men, Mingyu Xu, etc.
+    - Institute: Baichuan Inc., etc.
+    - Link: https://arxiv.org/abs/2403.03853
+    - Code: Not available
+    - Pub: Arxiv
+    - Tag: `Structured Pruning` `No Retraining` `LLM`
+    - Summary: It proposes a simple metric to measure the difference of layer’s input and output and does simple layer removal on LLM. The performance is better than LLM-Pruner, SliceGPT and LaCo, revealing a significant redundancy on depth-level of LLM.
+    - Comment: The method is so simple and they even compare the paper which posted on arxiv only two weeks before them. The redundancy in LLM is also a good topic to research.
+
+- **LaCo: Large Language Model Pruning via Layer Collapse**
+    - Author: Yifei Yang, Zouying Cao, Hai Zhao
+    - Institute: Shanghai Jiao Tong University
+    - Link: https://paperswithcode.com/paper/laco-large-language-model-pruning-via-layer
+    - Code: https://github.com/deamme/laco
+    - Pub: Arxiv
+    - Tag: `Structured Pruning` `LLM`
+    - Summary: It proposed a simple and effective method to collapse LLM layers with similarity beyond a threshold T, the collapse is just simply add the parameters of collapsed layers together. It achieved SOTA structured LLM pruning performance, which beats LLM-Pruner and SliceGPT.
+    - Comment: It open the era of layer pruning in LLM, while the work after it about two weeks, ShortGPT even surpass its performance with similar layer pruning method.
+
+
 - **ONE-SHOT SENSITIVITY-AWARE MIXED SPARSITY PRUNING FOR LARGE LANGUAGE MODELS**
     - Author: *Hang Shao, Bei Liu, Yanmin Qia*
     - Institute: Auditory Cognition and Computational Acoustics Lab, etc.
     - Link: https://arxiv.org/abs/2310.09499
     - Code: Not available
     - Pub: ICASSP 2024
-    - Tag:  `Unstructured Pruning` `No Retraining`
+    - Tag:  `Unstructured Pruning` `No Retraining` `LLM`
     - Summary: They combine OBD and OBS’s saliency score as their metric for evaluating the sensitivity of weights. They also compute the sensitivity level of each weight to give them different sparsity ratio s.t. the overall sparsity is satisfied. The performance is better than SparseGPT and works well with quantization.
     - Comment: They use lots of approximation when computing the sensitivity level of each weight matrices, but give intersting insights on the property of each layer and each weight matrices. (refer to Fig.1, Fig.2)
 
@@ -19,7 +40,7 @@ Hope we all find our own path in the research life. :seedling:
     - Link: https://openreview.net/pdf?id=DYIIRgwg2i
     - Code: Not available
     - Pub: ICLR 2024
-    - Tag: `Structured Pruning` `Unstructured Pruning` `LLM`
+    - Tag: `Structured Pruning` `Unstructured Pruning` `LLM` 
     - Summary: Propose algorithm for unstructured (SOTA), semi-structured (SOTA) and structured compression of LLMs. The algorithm can dynamically allocate weight across layers with global threshold. Utilise Fisher approximation with KFAC approximation to expand the curvature of the loss landscape, consider correlated weight, “prune and update” the model in multiple shots.
     - Comment: The math they use is very complex, I spend a few days to fully understand the whole background. While the method they propose is very strong to deal with any pruning condition of LLMs.
 

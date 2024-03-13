@@ -3,6 +3,36 @@ Model compression paper note including pruning, distillation.
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
 Hope we all find our own path in the research life. :seedling:
 
+- **Not All Experts are Equal: Efficient Expert Pruning and Skipping for Mixture-of-Experts Large Language Models**
+    - Author: Xudong Lu, Qi Liu, etc.
+    - Institute: CUHK MMlab, Shanghai Jiao Tong University, Shanghai Artificial Intelligence Laboratory
+    - Link: https://arc.net/l/quote/iqwsjght
+    - Code: https://github.com/Lucky-Lance/Expert_Sparsity
+    - Pub: ACL 2024 submission
+    - Tag: `MoE` `Structure Pruning` `LLM` `No Retraining`
+    - Summary: Propose expert-level pruning and dynamic expert-skipping methods for MoE LLM on Mixtral 8x7B. It can effectively reduce memory usage and increase inference speed of MoE models.
+    - Comment: Simple but effective pruning method for MoE, while the method is still naive and did not compare to “Task-Specific Expert Pruning for Sparse Mixture-of-Experts” in task-specific tasks, probably due to the retraining in that paper.
+
+- **Task-Specific Expert Pruning for Sparse Mixture-of-Experts**
+    - Author: Tianyu Chen, Shaohan Huang, etc.
+    - Institute: BDBC, Beihang University, China, SKLSDE Lab, Beihang University, China, etc.
+    - Link: https://arxiv.org/abs/2206.00277
+    - Code: Not available
+    - Pub: Arxiv 2022
+    - Tag: `MoE` `MoE pruning`
+    - Summary: A task-specific MoE model pruning that progressively drop the experts below certain threshold and only left one expert after half of training step. It shows that single-expert fine-tuned model can even beats MoE fine-tuned model on some tasks like MRPC.
+    - Comment: The criterion they use is naive and the single expert model’s inference speed is still slower than dense model, which suggest that there’s still ways to improve in this area.
+
+- **Mixtral of Experts**
+    - Author: Albert Q. Jiang, Alexandre Sablayrolles, etc.
+    - Institute: Mixtral.AI
+    - Link: [https://arxiv.org/abs/2401.04088#:~:text=Mixtral of Experts](https://arxiv.org/abs/2401.04088#:~:text=Mixtral%20of%20Experts)
+    - Code: https://github.com/mistralai/mistral-src
+    - Pub: Arxiv 2024
+    - Tag: `LLM` `MoE`
+    - Summary: A huge Sparse Mixture of Experts language model which outperforms or matches Llama2-70B and GPT-3.5 across all evaluated benchmarks with 7B activated parameters. It did not use special structure nor new routing network but did a lot of interesting routing analysis.
+    - Comment: They opensource their code and use Appache 2.0 lincense, so it’s friendly to the community, while it does not provide details about the datasets.
+
 - **ShortGPT: Layers in Large Language Models are More Redundant Than You Expect**
     - Author: Xin Men, Mingyu Xu, etc.
     - Institute: Baichuan Inc., etc.

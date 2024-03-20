@@ -3,6 +3,36 @@ Model compression paper note including pruning, distillation.
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
 Hope we all find our own path in the research life. :seedling:
 
+- **From Sparse to Soft Mixtures of Experts**
+    - Author: Joan Puigcerver∗ Carlos Riquelme∗, Basil Mustafa Neil Houlsby
+    - Institute: Google DeepMind
+    - Link: https://openreview.net/forum?id=jxpsAj7ltE
+    - Code: Algorithm code at https://github.com/google-research/vmoe
+    - Pub: ICLR 2024 spotlight
+    - Tag: `MoE`
+    - Summary: Instead of choosing top-k experts in MoE, they use softmax combination to transform input tokens into slots (Soft MoE). Through adjusting # of slots, they can achieve same training time complexity as MoE but performs better than other MoE baseline on vision tasks.
+    - Comment: It still has challenge on implementing auto-regressive decoder. However, the transformation for hard assignment to soft address experts imbalance and token dropping problem.
+
+- **Adaptive Gating in Mixture-of-Experts based Language Models**
+    - Author: Jiamin Li, Qiang Su, etc
+    - Institute: City University of Hong Kong, The Chinese University of Hong Kong
+    - Link: https://arxiv.org/abs/2310.07188
+    - Code: Not available
+    - Pub: EMNLP 2023
+    - Tag: `MoE`
+    - Summary: Propose adaptive gating in MoE that enables tokens to be processed by a flexible number of experts depending on the gating decision andlLeverage the idea of curriculum learning by strategically adjusting the order of training data samples
+    - Comment: The paper is well-written, the methods is simple and beautiful and they provides interesting insights of tokens routing to more experts, worthy to read it.
+
+- **Merging Experts into One: Improving Computational Efficiency of Mixture of Experts**
+    - Author: **Shwai He, Run-Ze Fan, etc.**
+    - Institute: University of Maryland, College Park, The University of Sydney, etc.
+    - Link: https://arxiv.org/abs/2310.09832
+    - Code: https://github.com/Shwai-He/MEO
+    - Pub: EMNLP 2023 Oral
+    - Tag: `MoE`
+    - Summary: It proposed to merge selected experts while training and inference by adding experts weights into single weight and forward it. It boost training efficiency and performs better than MoE.
+    - Comment: The expert structure is single linear layer with an activation function, so if the expert is normal FFN (linear-act-linear), we can’t just simply summarize it.
+
 - **Not All Experts are Equal: Efficient Expert Pruning and Skipping for Mixture-of-Experts Large Language Models**
     - Author: Xudong Lu, Qi Liu, etc.
     - Institute: CUHK MMlab, Shanghai Jiao Tong University, Shanghai Artificial Intelligence Laboratory

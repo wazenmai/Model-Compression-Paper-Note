@@ -3,6 +3,36 @@ Model compression paper note including pruning, distillation.
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
 Hope we all find our own path in the research life. :seedling:
 
+- **Parameter-Efficient Mixture-of-Experts Architecture for Pre-trained Language Models**
+    - Author: Ze-Feng Gao, Peiyu Liu, etc.
+    - Institute: Gaoling School of Artificial Intelligence, Renmin University of China, Department of Physics, Renmin University of China, etc.
+    - Link: https://arxiv.org/abs/2203.01104
+    - Code: https://github.com/RUCAIBox/MPOE
+    - Pub: Coling 2022
+    - Tag: `MoE`
+    - Summary: They use MPO to reduce expert weight matrix to one central tensor and four auxiliary tensors while sharing central tensor among experts in same layer. By doing this, they can effectively reduce MoE parameters to 0.19 of original scale. They also propose gradient masking so that central tensor won’t get too frequently update. Experiment results show that MPOE beats other baseline of GPT-2 and T5 on GLUE and NLG benchmark.
+    - Comment: It’s the first time to use MPO decomposition on MoE architecture, and it really performs well, while authors did not provide the training efficiency analysis.
+
+- **Scaling Vision with Sparse Mixture of Experts**
+    - Author: Carlos Riquelme, Joan Puigcerver, etc
+    - Institute: Google Brain
+    - Link: https://arxiv.org/abs/2106.05974
+    - Code: https://github.com/google-research/vmoe
+    - Pub: NeurIPS 2021
+    - Tag: `MoE`
+    - Summary: The first work to apply MoE on Vision Transformer. They also propose batched prioritized routing to further improve inference speed and provide lots of analysis on V-MoE.
+    - Comment: The analysis on V-MoE is thorough with great visualization which helps people to know more about the attribute of MoE routing and experts.
+
+- **AdaMV-MoE: Adaptive Multi-Task Vision Mixture-of-Experts**
+    - Author: Tianlong Chen, Xuxi Chen, etc.
+    - Institute: University of Texas at Austin, Apple, Google
+    - Link: https://www.semanticscholar.org/paper/a4382a9b1edba07e0af4df2ff6a4bce22f4e55b5
+    - Code: https://github.com/google-research/google-research/tree/master/moe_mtl
+    - Pub: ICCV 2023
+    - Tag: `MoE`
+    - Summary: For vision multi-task learning, they use task-dependent router and differnt top-k number for each task in MoE layer. They use task’s validation set loss to determine k, and outperform recent SOTA MTL MoE appraoch (TAPS).
+    - Comment: The method is simple and performs well on image classification, object detection and instance segmentation. However, the training and inference resources need 16-64 and 8 TPU-v3.
+
 - **From Sparse to Soft Mixtures of Experts**
     - Author: Joan Puigcerver∗ Carlos Riquelme∗, Basil Mustafa Neil Houlsby
     - Institute: Google DeepMind

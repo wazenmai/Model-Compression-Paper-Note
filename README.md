@@ -1,7 +1,12 @@
-# :whale: Model-Compression-Paper-Note
-Model compression paper note including pruning, distillation.
+# :whale: Paper Note
 Feel free to drop a comment if you want to address any issues, and please don't hesitate to correct me if I've misunderstood the papers. 
 Hope we all find our own path in the research life. :seedling:
+
+1. [Model-Compression-Paper-Note](#model-compression)
+2. [Mixture-of-Experts-Paper-Note](#moe)
+
+## Model-Compression-Paper-Note<a name="model-compression"></a>
+Model compression paper note including pruning, distillation.
 
 - **ShortGPT: Layers in Large Language Models are More Redundant Than You Expect**
     - Author: Xin Men, Mingyu Xu, etc.
@@ -144,7 +149,7 @@ Hope we all find our own path in the research life. :seedling:
     - Summary: Use KL divergence of student’s and teacher’s logits as predictive knowledge and values of heads and activation output as representative knowledge. Introduce knowledge-preserving pruning (KPP) that prune and adjust weight while taking one structure once a time from input layer to output layer to avoid accuracy degradation.
     - Comment: KPP gives their benchmark metric good scores while pruning BERT within 10 minutes. It performs way more better than its series (A fast post-training pruning framework, KCM).
 
-## Mixture-of-Experts-Paper-Note
+## Mixture-of-Experts-Paper-Note<a name="moe"></a>
 
 - **Parameter-Efficient Mixture-of-Experts Architecture for Pre-trained Language Models**
     - Author: Ze-Feng Gao, Peiyu Liu, etc.

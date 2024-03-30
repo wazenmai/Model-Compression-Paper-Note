@@ -5,8 +5,58 @@ Hope we all find our own path in the research life. :seedling:
 1. [Model-Compression-Paper-Note](#model-compression)
 2. [Mixture-of-Experts-Paper-Note](#moe)
 
-## Model-Compression-Paper-Note<a name="model-compression"></a>
+## <a name="model-compression"></a>Model-Compression-Paper-Note
 Model compression paper note including pruning, distillation.
+
+- **Merge, Then Compress: Demystify Efficient SMoE with Hints from Its Routing Policy**
+    - Author: Pingzhi Li, Zhenyu Zhang, etc.
+    - Institute: The University of North Carolina at Chapel Hill, The University of Texas at Austin, etc.
+    - Link: https://arc.net/l/quote/kogdwhcf
+    - Code: https://github.com/UNITES-Lab/MC-SMoE
+    - Pub: ICLR 2024 Spotlight
+    - Tag: `MoE` `Structured Pruning`
+    - Summary: This paper proposed a method to first repermute expert weights then using the similarity of each experts to group and merge experts. After merging experts, they found a low-dimensionality in weights and further compress them to reduce memory usage and experts redundancy in SMoE. They also provide detailed ablation study of each methods.
+    - Comment: Great paper with nice observations and ablation studies.
+
+    - **Merging Experts into One: Improving Computational Efficiency of Mixture of Experts**
+    - Author: **Shwai He, Run-Ze Fan, etc.**
+    - Institute: University of Maryland, College Park, The University of Sydney, etc.
+    - Link: https://arxiv.org/abs/2310.09832
+    - Code: https://github.com/Shwai-He/MEO
+    - Pub: EMNLP 2023 Oral
+    - Tag: `MoE`
+    - Summary: It proposed to merge selected experts while training and inference by adding experts weights into single weight and forward it. It boost training efficiency and performs better than MoE.
+    - Comment: The expert structure is single linear layer with an activation function, so if the expert is normal FFN (linear-act-linear), we can’t just simply summarize it.
+
+- **Not All Experts are Equal: Efficient Expert Pruning and Skipping for Mixture-of-Experts Large Language Models**
+    - Author: Xudong Lu, Qi Liu, etc.
+    - Institute: CUHK MMlab, Shanghai Jiao Tong University, Shanghai Artificial Intelligence Laboratory
+    - Link: https://arc.net/l/quote/iqwsjght
+    - Code: https://github.com/Lucky-Lance/Expert_Sparsity
+    - Pub: ACL 2024 submission
+    - Tag: `MoE` `Structure Pruning` `LLM` `No Retraining`
+    - Summary: Propose expert-level pruning and dynamic expert-skipping methods for MoE LLM on Mixtral 8x7B. It can effectively reduce memory usage and increase inference speed of MoE models.
+    - Comment: Simple but effective pruning method for MoE, while the method is still naive and did not compare to “Task-Specific Expert Pruning for Sparse Mixture-of-Experts” in task-specific tasks, probably due to the retraining in that paper.
+
+- **Task-Specific Expert Pruning for Sparse Mixture-of-Experts**
+    - Author: Tianyu Chen, Shaohan Huang, etc.
+    - Institute: BDBC, Beihang University, China, SKLSDE Lab, Beihang University, China, etc.
+    - Link: https://arxiv.org/abs/2206.00277
+    - Code: Not available
+    - Pub: Arxiv 2022
+    - Tag: `MoE` `MoE pruning`
+    - Summary: A task-specific MoE model pruning that progressively drop the experts below certain threshold and only left one expert after half of training step. It shows that single-expert fine-tuned model can even beats MoE fine-tuned model on some tasks like MRPC.
+    - Comment: The criterion they use is naive and the single expert model’s inference speed is still slower than dense model, which suggest that there’s still ways to improve in this area.
+
+- **Parameter-Efficient Mixture-of-Experts Architecture for Pre-trained Language Models**
+    - Author: Ze-Feng Gao, Peiyu Liu, etc.
+    - Institute: Gaoling School of Artificial Intelligence, Renmin University of China, Department of Physics, Renmin University of China, etc.
+    - Link: https://arxiv.org/abs/2203.01104
+    - Code: https://github.com/RUCAIBox/MPOE
+    - Pub: Coling 2022
+    - Tag: `MoE`
+    - Summary: They use MPO to reduce expert weight matrix to one central tensor and four auxiliary tensors while sharing central tensor among experts in same layer. By doing this, they can effectively reduce MoE parameters to 0.19 of original scale. They also propose gradient masking so that central tensor won’t get too frequently update. Experiment results show that MPOE beats other baseline of GPT-2 and T5 on GLUE and NLG benchmark.
+    - Comment: It’s the first time to use MPO decomposition on MoE architecture, and it really performs well, while authors did not provide the training efficiency analysis.
 
 - **ShortGPT: Layers in Large Language Models are More Redundant Than You Expect**
     - Author: Xin Men, Mingyu Xu, etc.
@@ -149,17 +199,7 @@ Model compression paper note including pruning, distillation.
     - Summary: Use KL divergence of student’s and teacher’s logits as predictive knowledge and values of heads and activation output as representative knowledge. Introduce knowledge-preserving pruning (KPP) that prune and adjust weight while taking one structure once a time from input layer to output layer to avoid accuracy degradation.
     - Comment: KPP gives their benchmark metric good scores while pruning BERT within 10 minutes. It performs way more better than its series (A fast post-training pruning framework, KCM).
 
-## Mixture-of-Experts-Paper-Note<a name="moe"></a>
-
-- **Parameter-Efficient Mixture-of-Experts Architecture for Pre-trained Language Models**
-    - Author: Ze-Feng Gao, Peiyu Liu, etc.
-    - Institute: Gaoling School of Artificial Intelligence, Renmin University of China, Department of Physics, Renmin University of China, etc.
-    - Link: https://arxiv.org/abs/2203.01104
-    - Code: https://github.com/RUCAIBox/MPOE
-    - Pub: Coling 2022
-    - Tag: `MoE`
-    - Summary: They use MPO to reduce expert weight matrix to one central tensor and four auxiliary tensors while sharing central tensor among experts in same layer. By doing this, they can effectively reduce MoE parameters to 0.19 of original scale. They also propose gradient masking so that central tensor won’t get too frequently update. Experiment results show that MPOE beats other baseline of GPT-2 and T5 on GLUE and NLG benchmark.
-    - Comment: It’s the first time to use MPO decomposition on MoE architecture, and it really performs well, while authors did not provide the training efficiency analysis.
+## <a name="moe"></a>Mixture-of-Experts-Paper-Note
 
 - **Scaling Vision with Sparse Mixture of Experts**
     - Author: Carlos Riquelme, Joan Puigcerver, etc
@@ -200,36 +240,6 @@ Model compression paper note including pruning, distillation.
     - Tag: `MoE`
     - Summary: Propose adaptive gating in MoE that enables tokens to be processed by a flexible number of experts depending on the gating decision andlLeverage the idea of curriculum learning by strategically adjusting the order of training data samples
     - Comment: The paper is well-written, the methods is simple and beautiful and they provides interesting insights of tokens routing to more experts, worthy to read it.
-
-- **Merging Experts into One: Improving Computational Efficiency of Mixture of Experts**
-    - Author: **Shwai He, Run-Ze Fan, etc.**
-    - Institute: University of Maryland, College Park, The University of Sydney, etc.
-    - Link: https://arxiv.org/abs/2310.09832
-    - Code: https://github.com/Shwai-He/MEO
-    - Pub: EMNLP 2023 Oral
-    - Tag: `MoE`
-    - Summary: It proposed to merge selected experts while training and inference by adding experts weights into single weight and forward it. It boost training efficiency and performs better than MoE.
-    - Comment: The expert structure is single linear layer with an activation function, so if the expert is normal FFN (linear-act-linear), we can’t just simply summarize it.
-
-- **Not All Experts are Equal: Efficient Expert Pruning and Skipping for Mixture-of-Experts Large Language Models**
-    - Author: Xudong Lu, Qi Liu, etc.
-    - Institute: CUHK MMlab, Shanghai Jiao Tong University, Shanghai Artificial Intelligence Laboratory
-    - Link: https://arc.net/l/quote/iqwsjght
-    - Code: https://github.com/Lucky-Lance/Expert_Sparsity
-    - Pub: ACL 2024 submission
-    - Tag: `MoE` `Structure Pruning` `LLM` `No Retraining`
-    - Summary: Propose expert-level pruning and dynamic expert-skipping methods for MoE LLM on Mixtral 8x7B. It can effectively reduce memory usage and increase inference speed of MoE models.
-    - Comment: Simple but effective pruning method for MoE, while the method is still naive and did not compare to “Task-Specific Expert Pruning for Sparse Mixture-of-Experts” in task-specific tasks, probably due to the retraining in that paper.
-
-- **Task-Specific Expert Pruning for Sparse Mixture-of-Experts**
-    - Author: Tianyu Chen, Shaohan Huang, etc.
-    - Institute: BDBC, Beihang University, China, SKLSDE Lab, Beihang University, China, etc.
-    - Link: https://arxiv.org/abs/2206.00277
-    - Code: Not available
-    - Pub: Arxiv 2022
-    - Tag: `MoE` `MoE pruning`
-    - Summary: A task-specific MoE model pruning that progressively drop the experts below certain threshold and only left one expert after half of training step. It shows that single-expert fine-tuned model can even beats MoE fine-tuned model on some tasks like MRPC.
-    - Comment: The criterion they use is naive and the single expert model’s inference speed is still slower than dense model, which suggest that there’s still ways to improve in this area.
 
 - **Mixtral of Experts**
     - Author: Albert Q. Jiang, Alexandre Sablayrolles, etc.

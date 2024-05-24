@@ -199,6 +199,26 @@ Model compression paper note including pruning, distillation.
     - Summary: Use KL divergence of student’s and teacher’s logits as predictive knowledge and values of heads and activation output as representative knowledge. Introduce knowledge-preserving pruning (KPP) that prune and adjust weight while taking one structure once a time from input layer to output layer to avoid accuracy degradation.
     - Comment: KPP gives their benchmark metric good scores while pruning BERT within 10 minutes. It performs way more better than its series (A fast post-training pruning framework, KCM).
 
+- **Editing Models With Task Arithmetic**
+    - Author: Gabriel Ilharco, Marco Tulio Ribeiro, etc.
+    - Institute: University of Washington, Microsoft Research, Allen Institute for AI
+    - Link: https://arxiv.org/abs/2212.04089
+    - Code: https://github.com/mlfoundations/task_vectors
+    - Pub: ICLR 2023
+    - Tag: `Merging`
+    - Summary: For merging models finetuned on different tasks from same pretrained checkpoint, they define task vector as finetuned weight minus pretrained weight. Through negating, adding arithmetic operation can let model forget or learn specific language.
+    - Comment: Interesting thought but the hyperparameter of adding model need grid search.
+
+- **ZIPIT! Merging Models From Different Tasks without Training**
+    - Author: George Stoica∗ Daniel Bolya*, etc.
+    - Institute: Georgia Tech
+    - Link: https://arxiv.org/abs/2305.03053
+    - Code: https://github.com/gstoica27/ZipIt
+    - Pub: ICLR 2024
+    - Tag: `Merging`
+    - Summary: First, concatenate output features of models. Second, compute the correlation of this concatenate features. Last, we obtain a feature with top n pairs of correlation pair with 1/2 from each model, where n is output feature shape. It works much better than previous work.
+    - Comment: It’s a reasonable merging methods without retraining, they also merge features within the same model and give mathmatical proof of it.
+
 ## <a name="moe"></a>Mixture-of-Experts-Paper-Note
 
 - **Scaling Vision with Sparse Mixture of Experts**
@@ -250,6 +270,16 @@ Model compression paper note including pruning, distillation.
     - Tag: `LLM` `MoE`
     - Summary: A huge Sparse Mixture of Experts language model which outperforms or matches Llama2-70B and GPT-3.5 across all evaluated benchmarks with 7B activated parameters. It did not use special structure nor new routing network but did a lot of interesting routing analysis.
     - Comment: They opensource their code and use Appache 2.0 lincense, so it’s friendly to the community, while it does not provide details about the datasets.
+
+- **Mixture of LoRA Experts**
+    - Author: Xun Wu, Shaohan Huang, Furu Wei
+    - Institute: Microsoft Research Asia, Tsinghua University
+    - Link: https://arxiv.org/abs/2404.13628
+    - Code: https://github.com/yushuiwx/MoLE
+    - Pub: ICLR 2024
+    - Tag: `MoE` `LoRA`
+    - Summary: They propose a MoE-similar way to combine many LoRA experts with a gating function without further retraining the whole model. The results on V&L and NLP domain are better than baseline.
+    - Comment: It’s an efficient way to combine many LoRAs together, and they really did a lot of experiments to prove their method.
 
 ### Acknowledgement
 Thanks for [Awesome-LLM-Prune](https://github.com/pprp/Awesome-LLM-Prune) that inspires me for this note, the template is based on their work.
